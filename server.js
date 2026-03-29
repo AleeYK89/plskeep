@@ -24,6 +24,10 @@ function sanitize(str) {
   return str.replace(/[^a-zA-Z0-9_\-.:/?=&%@]/g, '');
 }
 
+function sanitizeUsername(u) {
+  return u.replace(/^@/, '').trim();
+}
+
 // ── POST /api/info — single video metadata ──────────────────────────────────
 app.post('/api/info', (req, res) => {
   const { url } = req.body;
@@ -56,21 +60,28 @@ app.post('/api/info', (req, res) => {
   });
 });
 
-// ── POST /api/user/videos — list all videos of a user ──────────────────────
+// ── POST /api/user/videos — paginated video list ────────────────────────────
+// Query: username, page (1-based), pageSize (default 24)
 app.post('/api/user/videos', (req, res) => {
-  let { username } = req.body;
+  let { username, page = 1, pageSize = 24 } = req.body;
   if (!username) return res.status(400).json({ error: 'Gebruikersnaam is verplicht.' });
 
-  username = username.replace(/^@/, '').trim();
+  username = sanitizeUsername(username);
   if (!/^[\w.]+$/.test(username))
     return res.status(400).json({ error: 'Ongeldige gebruikersnaam.' });
 
+  page = Math.max(1, parseInt(page) || 1);
+  pageSize = Math.min(50, Math.max(6, parseInt(pageSize) || 24));
+
+  const start = (page - 1) * pageSize + 1;
+  const end   = page * pageSize;
+
   const profileUrl = `https://www.tiktok.com/@${username}`;
-  console.log(`[user/videos] Fetching profile: ${profileUrl}`);
+  console.log(`[user/videos] @${username} page=${page} items=${start}-${end}`);
 
-  const cmd = `yt-dlp --flat-playlist --dump-json --playlist-end 30 "${profileUrl}"`;
+  const cmd = `yt-dlp --flat-playlist --dump-json --playlist-start ${start} --playlist-end ${end} "${profileUrl}"`;
 
-  exec(cmd, { timeout: 60000, maxBuffer: 10 * 1024 * 1024 }, (err, stdout, stderr) => {
+  exec(cmd, { timeout: 90000, maxBuffer: 20 * 1024 * 1024 }, (err, stdout, stderr) => {
     if (err && !stdout) {
       console.error('yt-dlp user error:', stderr);
       return res.status(500).json({ error: 'Kon profiel niet ophalen. Gebruiker bestaat mogelijk niet of is privé.' });
@@ -92,15 +103,13 @@ app.post('/api/user/videos', (req, res) => {
           like_count: v.like_count || 0,
           upload_date: v.upload_date || null,
         });
-      } catch {
-        // skip malformed lines
-      }
+      } catch { /* skip */ }
     }
 
-    if (!videos.length)
-      return res.status(404).json({ error: "Geen video's gevonden voor dit account." });
+    // If we got fewer results than pageSize, we've hit the end
+    const hasMore = videos.length >= pageSize;
 
-    res.json({ username, videos });
+    res.json({ username, videos, page, pageSize, hasMore });
   });
 });
 
