@@ -8,203 +8,185 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --card: #16161f;
-    --border: #ffffff0f;
-    --accent: #fe2c55;
-    --accent2: #25f4ee;
-    --text: #f0f0f8;
-    --muted: #888899;
-    --green: #22c55e;
-    --red: #ef4444;
-    --radius: 16px;
+    --bg: #0a0a0f; --surface: #111118; --card: #16161f;
+    --border: #ffffff0f; --accent: #fe2c55; --accent2: #25f4ee;
+    --text: #f0f0f8; --muted: #888899;
+    --green: #22c55e; --red: #ef4444; --radius: 16px;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
   body::before {
     content: ''; position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    opacity: .025; pointer-events: none; z-index: 0;
+    opacity:.025; pointer-events:none; z-index:0;
   }
-  .blob { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
-  .blob1 { width: 600px; height: 600px; background: #fe2c5520; top: -200px; left: -100px; }
-  .blob2 { width: 500px; height: 500px; background: #25f4ee18; bottom: -100px; right: -100px; }
+  .blob { position:fixed; border-radius:50%; filter:blur(120px); pointer-events:none; z-index:0; }
+  .blob1 { width:600px; height:600px; background:#fe2c5520; top:-200px; left:-100px; }
+  .blob2 { width:500px; height:500px; background:#25f4ee18; bottom:-100px; right:-100px; }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 40px;
-    background: rgba(10,10,15,.88); backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo { display: flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; text-decoration: none; color: var(--text); }
-  .logo-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), #ff6b9d); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-  .logo span { color: var(--accent); }
-  .status-pill { display: flex; align-items: center; gap: 8px; padding: 7px 16px; border-radius: 100px; background: var(--card); border: 1px solid var(--border); font-size: .8rem; color: var(--muted); }
-  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
-  .status-dot.online { background: var(--green); box-shadow: 0 0 6px var(--green); }
-  .status-dot.offline { background: var(--red); }
+  /* NAV */
+  nav { position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:18px 40px; background:rgba(10,10,15,.88); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+  .logo { display:flex; align-items:center; gap:10px; font-family:'Syne',sans-serif; font-weight:800; font-size:1.3rem; text-decoration:none; color:var(--text); }
+  .logo-icon { width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,var(--accent),#ff6b9d); display:flex; align-items:center; justify-content:center; font-size:18px; }
+  .logo span { color:var(--accent); }
+  .status-pill { display:flex; align-items:center; gap:8px; padding:7px 16px; border-radius:100px; background:var(--card); border:1px solid var(--border); font-size:.8rem; color:var(--muted); }
+  .status-dot { width:8px; height:8px; border-radius:50%; background:var(--muted); }
+  .status-dot.online { background:var(--green); box-shadow:0 0 6px var(--green); }
+  .status-dot.offline { background:var(--red); }
 
-  /* ── TABS ── */
-  .page-tabs {
-    position: relative; z-index: 1;
-    display: flex; justify-content: center; gap: 8px;
-    padding: 32px 20px 0;
-  }
-  .page-tab {
-    padding: 10px 28px; border-radius: 100px;
-    background: var(--card); border: 1.5px solid var(--border);
-    color: var(--muted); font-family: 'Syne', sans-serif; font-weight: 600; font-size: .9rem;
-    cursor: pointer; transition: all .2s;
-  }
-  .page-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .page-tab:hover:not(.active) { border-color: #ffffff22; color: var(--text); }
+  /* TABS */
+  .page-tabs { position:relative; z-index:1; display:flex; justify-content:center; gap:8px; padding:32px 20px 0; }
+  .page-tab { padding:10px 28px; border-radius:100px; background:var(--card); border:1.5px solid var(--border); color:var(--muted); font-family:'Syne',sans-serif; font-weight:600; font-size:.9rem; cursor:pointer; transition:all .2s; }
+  .page-tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .page-tab:hover:not(.active) { border-color:#ffffff22; color:var(--text); }
 
-  /* ── PAGES ── */
-  .page { display: none; position: relative; z-index: 1; }
-  .page.active { display: block; }
+  /* PAGES */
+  .page { display:none; position:relative; z-index:1; }
+  .page.active { display:block; }
 
-  /* ── HERO ── */
-  .hero { text-align: center; padding: 70px 20px 50px; }
-  .badge { display: inline-block; background: linear-gradient(90deg,#fe2c5520,#25f4ee20); border: 1px solid #ffffff15; border-radius: 100px; padding: 6px 18px; font-size: .8rem; color: var(--accent2); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 28px; }
-  h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem,5.5vw,4rem); font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
-  h1 .grad { background: linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .subtitle { font-size: 1rem; color: var(--muted); max-width: 480px; margin: 0 auto 40px; line-height: 1.6; }
+  /* HERO */
+  .hero { text-align:center; padding:70px 20px 50px; }
+  .badge { display:inline-block; background:linear-gradient(90deg,#fe2c5520,#25f4ee20); border:1px solid #ffffff15; border-radius:100px; padding:6px 18px; font-size:.8rem; color:var(--accent2); letter-spacing:.08em; text-transform:uppercase; margin-bottom:28px; }
+  h1 { font-family:'Syne',sans-serif; font-size:clamp(2.2rem,5.5vw,4rem); font-weight:800; line-height:1.1; margin-bottom:16px; }
+  h1 .grad { background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .subtitle { font-size:1rem; color:var(--muted); max-width:480px; margin:0 auto 40px; line-height:1.6; }
 
-  /* ── DOWNLOADER CARD ── */
-  .downloader { max-width: 740px; margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; box-shadow: 0 40px 80px #00000055; position: relative; }
-  .downloader::before { content: ''; position: absolute; inset: -1px; border-radius: 24px; background: linear-gradient(135deg,#fe2c5530,transparent 50%,#25f4ee20); z-index: -1; pointer-events: none; }
-  .input-row { display: flex; gap: 12px; }
-  .url-input { flex: 1; background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px 20px; color: var(--text); font-size: 1rem; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .25s; }
-  .url-input::placeholder { color: var(--muted); }
-  .url-input:focus { border-color: var(--accent); }
-  .url-input.shake { animation: shake .4s ease; border-color: var(--red); }
+  /* DOWNLOADER CARD */
+  .downloader { max-width:740px; margin:0 auto; background:var(--card); border:1px solid var(--border); border-radius:24px; padding:32px; box-shadow:0 40px 80px #00000055; position:relative; }
+  .downloader::before { content:''; position:absolute; inset:-1px; border-radius:24px; background:linear-gradient(135deg,#fe2c5530,transparent 50%,#25f4ee20); z-index:-1; pointer-events:none; }
+  .input-row { display:flex; gap:12px; }
+  .url-input { flex:1; background:var(--surface); border:1.5px solid var(--border); border-radius:12px; padding:16px 20px; color:var(--text); font-size:1rem; font-family:'DM Sans',sans-serif; outline:none; transition:border-color .25s; }
+  .url-input::placeholder { color:var(--muted); }
+  .url-input:focus { border-color:var(--accent); }
+  .url-input.shake { animation:shake .4s ease; border-color:var(--red); }
   @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  .btn-primary { background:linear-gradient(135deg,var(--accent),#ff6b9d); color:#fff; border:none; border-radius:12px; padding:16px 28px; font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; white-space:nowrap; transition:opacity .2s,transform .15s; }
+  .btn-primary:hover:not(:disabled) { opacity:.88; transform:translateY(-1px); }
+  .btn-primary:disabled { opacity:.45; cursor:not-allowed; transform:none; }
 
-  .btn-primary { background: linear-gradient(135deg,var(--accent),#ff6b9d); color: #fff; border: none; border-radius: 12px; padding: 16px 28px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; white-space: nowrap; transition: opacity .2s, transform .15s; }
-  .btn-primary:hover:not(:disabled) { opacity: .88; transform: translateY(-1px); }
-  .btn-primary:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+  .state { display:none; margin-top:22px; }
+  .state.show { display:block; }
+  .loading-inner { text-align:center; padding:26px 0; }
+  .spinner { width:34px; height:34px; border-radius:50%; border:3px solid var(--border); border-top-color:var(--accent); animation:spin .7s linear infinite; margin:0 auto 12px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .loading-inner p { color:var(--muted); font-size:.9rem; }
+  .error-box { background:#ef444415; border:1px solid #ef444440; border-radius:12px; padding:14px 18px; color:#fca5a5; font-size:.88rem; display:flex; align-items:center; gap:10px; }
+  .result-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; display:flex; gap:16px; align-items:flex-start; }
+  .thumb-wrap { width:80px; height:80px; border-radius:10px; overflow:hidden; flex-shrink:0; background:var(--card); display:flex; align-items:center; justify-content:center; font-size:28px; }
+  .thumb-wrap img { width:100%; height:100%; object-fit:cover; }
+  .result-info { flex:1; min-width:0; }
+  .result-title { font-weight:600; font-size:.95rem; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .result-sub { color:var(--muted); font-size:.82rem; margin-bottom:14px; }
+  .quality-row { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .quality-btn { padding:6px 14px; border-radius:8px; background:var(--card); border:1.5px solid var(--border); color:var(--muted); font-size:.82rem; cursor:pointer; transition:all .18s; font-family:'DM Sans',sans-serif; }
+  .quality-btn.selected,.quality-btn:hover { border-color:var(--accent); color:var(--accent); background:#fe2c5510; }
+  .dl-buttons { display:flex; gap:10px; flex-wrap:wrap; }
+  .dl-btn { padding:10px 20px; border-radius:10px; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:600; display:flex; align-items:center; gap:7px; transition:opacity .2s,transform .15s; }
+  .dl-btn:hover:not(:disabled) { opacity:.85; transform:translateY(-1px); }
+  .dl-btn:disabled { opacity:.45; cursor:not-allowed; }
+  .dl-btn.mp4 { background:var(--accent); color:#fff; }
+  .dl-btn.mp3 { background:var(--accent2); color:#000; }
+  .progress-wrap { margin-top:14px; display:none; }
+  .progress-wrap.show { display:block; }
+  .progress-bar-track { height:4px; background:var(--border); border-radius:100px; overflow:hidden; }
+  .progress-bar-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width .4s; }
+  .progress-label { font-size:.78rem; color:var(--muted); margin-top:6px; }
 
-  /* states */
-  .state { display: none; margin-top: 22px; }
-  .state.show { display: block; }
-  .loading-inner { text-align: center; padding: 26px 0; }
-  .spinner { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--border); border-top-color: var(--accent); animation: spin .7s linear infinite; margin: 0 auto 12px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-inner p { color: var(--muted); font-size: .9rem; }
-  .error-box { background: #ef444415; border: 1px solid #ef444440; border-radius: 12px; padding: 14px 18px; color: #fca5a5; font-size: .88rem; display: flex; align-items: center; gap: 10px; }
-
-  /* result */
-  .result-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; display: flex; gap: 16px; align-items: flex-start; }
-  .thumb-wrap { width: 80px; height: 80px; border-radius: 10px; overflow: hidden; flex-shrink: 0; background: var(--card); display: flex; align-items: center; justify-content: center; font-size: 28px; }
-  .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; }
-  .result-info { flex: 1; min-width: 0; }
-  .result-title { font-weight: 600; font-size: .95rem; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .result-sub { color: var(--muted); font-size: .82rem; margin-bottom: 14px; }
-  .quality-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-  .quality-btn { padding: 6px 14px; border-radius: 8px; background: var(--card); border: 1.5px solid var(--border); color: var(--muted); font-size: .82rem; cursor: pointer; transition: all .18s; font-family: 'DM Sans', sans-serif; }
-  .quality-btn.selected, .quality-btn:hover { border-color: var(--accent); color: var(--accent); background: #fe2c5510; }
-  .dl-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-  .dl-btn { padding: 10px 20px; border-radius: 10px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: .88rem; font-weight: 600; display: flex; align-items: center; gap: 7px; transition: opacity .2s, transform .15s; }
-  .dl-btn:hover:not(:disabled) { opacity: .85; transform: translateY(-1px); }
-  .dl-btn:disabled { opacity: .45; cursor: not-allowed; }
-  .dl-btn.mp4 { background: var(--accent); color: #fff; }
-  .dl-btn.mp3 { background: var(--accent2); color: #000; }
-  .progress-wrap { margin-top: 14px; display: none; }
-  .progress-wrap.show { display: block; }
-  .progress-bar-track { height: 4px; background: var(--border); border-radius: 100px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg,var(--accent),var(--accent2)); width: 0%; transition: width .4s; }
-  .progress-label { font-size: .78rem; color: var(--muted); margin-top: 6px; }
-
-  /* ── USER BROWSER PAGE ── */
-  .user-page { padding: 50px 20px 80px; max-width: 980px; margin: 0 auto; }
-  .user-page h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 8px; }
-  .user-page .sub { color: var(--muted); font-size: .92rem; margin-bottom: 32px; }
-
-  .user-search-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; margin-bottom: 36px; }
-  .user-input-row { display: flex; gap: 12px; align-items: center; }
-  .at-prefix { font-family: 'Syne', sans-serif; font-size: 1.3rem; color: var(--muted); padding: 0 4px 0 8px; }
-  .user-input { flex: 1; background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 15px 18px; color: var(--text); font-size: 1rem; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .25s; }
-  .user-input:focus { border-color: var(--accent2); }
-  .btn-teal { background: linear-gradient(135deg, var(--accent2), #00c9c4); color: #000; border: none; border-radius: 12px; padding: 15px 28px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: .95rem; cursor: pointer; white-space: nowrap; transition: opacity .2s, transform .15s; }
-  .btn-teal:hover:not(:disabled) { opacity: .88; transform: translateY(-1px); }
-  .btn-teal:disabled { opacity: .45; cursor: not-allowed; }
+  /* USER PAGE */
+  .user-page { padding:50px 20px 80px; max-width:1100px; margin:0 auto; }
+  .user-page h2 { font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; margin-bottom:8px; }
+  .user-page .sub { color:var(--muted); font-size:.92rem; margin-bottom:32px; }
+  .user-search-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; margin-bottom:36px; }
+  .user-input-row { display:flex; gap:12px; align-items:center; }
+  .at-prefix { font-family:'Syne',sans-serif; font-size:1.3rem; color:var(--muted); padding:0 4px 0 8px; }
+  .user-input { flex:1; background:var(--surface); border:1.5px solid var(--border); border-radius:12px; padding:15px 18px; color:var(--text); font-size:1rem; font-family:'DM Sans',sans-serif; outline:none; transition:border-color .25s; }
+  .user-input:focus { border-color:var(--accent2); }
+  .btn-teal { background:linear-gradient(135deg,var(--accent2),#00c9c4); color:#000; border:none; border-radius:12px; padding:15px 28px; font-family:'Syne',sans-serif; font-weight:700; font-size:.95rem; cursor:pointer; white-space:nowrap; transition:opacity .2s,transform .15s; }
+  .btn-teal:hover:not(:disabled) { opacity:.88; transform:translateY(-1px); }
+  .btn-teal:disabled { opacity:.45; cursor:not-allowed; }
 
   /* profile header */
-  .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding: 20px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
-  .profile-avatar { width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: #fff; font-family: 'Syne', sans-serif; flex-shrink: 0; }
-  .profile-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; }
-  .profile-count { color: var(--muted); font-size: .85rem; margin-top: 2px; }
-  .select-all-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .select-all-row span { color: var(--muted); font-size: .85rem; }
-  .btn-dl-selected { background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: .88rem; cursor: pointer; transition: opacity .2s; display: flex; align-items: center; gap: 8px; }
-  .btn-dl-selected:disabled { opacity: .4; cursor: not-allowed; }
-  .btn-dl-selected:hover:not(:disabled) { opacity: .85; }
-  .checkbox-label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: .85rem; color: var(--muted); }
-  .checkbox-label input { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+  .profile-header { display:flex; align-items:center; gap:16px; margin-bottom:20px; padding:20px 24px; background:var(--card); border:1px solid var(--border); border-radius:16px; }
+  .profile-avatar { width:54px; height:54px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800; color:#fff; font-family:'Syne',sans-serif; flex-shrink:0; }
+  .profile-name { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; }
+  .profile-count { color:var(--muted); font-size:.85rem; margin-top:2px; }
 
-  /* video grid */
-  .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-  .video-card {
-    background: var(--card); border: 1.5px solid var(--border);
-    border-radius: 14px; overflow: hidden; cursor: pointer;
-    transition: border-color .2s, transform .2s;
-    position: relative;
-  }
-  .video-card:hover { border-color: #ffffff22; transform: translateY(-2px); }
-  .video-card.selected { border-color: var(--accent); }
-  .video-card.selected .vc-check { opacity: 1; }
-  .vc-thumb { width: 100%; aspect-ratio: 9/16; background: var(--surface); position: relative; overflow: hidden; }
-  .vc-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .vc-thumb .no-thumb { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 36px; }
-  .vc-duration { position: absolute; bottom: 6px; right: 8px; background: #000000cc; color: #fff; font-size: .72rem; padding: 2px 7px; border-radius: 6px; font-weight: 600; }
-  .vc-check { position: absolute; top: 8px; left: 8px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0; transition: opacity .2s; box-shadow: 0 2px 8px #00000060; }
-  .vc-info { padding: 12px 12px 14px; }
-  .vc-title { font-size: .82rem; font-weight: 500; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px; }
-  .vc-meta { display: flex; gap: 10px; font-size: .75rem; color: var(--muted); }
-  .vc-actions { display: flex; gap: 6px; margin-top: 10px; }
-  .vc-btn { flex: 1; padding: 7px; border-radius: 8px; border: none; cursor: pointer; font-size: .78rem; font-weight: 600; font-family: 'DM Sans', sans-serif; transition: opacity .2s; }
-  .vc-btn.mp4 { background: var(--accent); color: #fff; }
-  .vc-btn.mp3 { background: #25f4ee22; color: var(--accent2); border: 1px solid #25f4ee44; }
-  .vc-btn:hover { opacity: .82; }
-  .vc-btn:disabled { opacity: .4; cursor: not-allowed; }
-  .vc-downloading { position: absolute; inset: 0; background: #0a0a0fcc; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border-radius: 12px; }
-  .vc-downloading .spinner { width: 28px; height: 28px; margin: 0; }
-  .vc-downloading span { font-size: .78rem; color: var(--muted); }
-
-  /* user states */
-  .user-state { display: none; }
-  .user-state.show { display: block; }
-  .user-loading { text-align: center; padding: 60px 0; }
-  .user-loading .spinner { width: 40px; height: 40px; margin: 0 auto 16px; border-top-color: var(--accent2); }
-  .user-loading p { color: var(--muted); }
+  /* toolbar */
+  .toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; gap:12px; flex-wrap:wrap; }
+  .checkbox-label { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:.85rem; color:var(--muted); }
+  .checkbox-label input { accent-color:var(--accent); width:16px; height:16px; cursor:pointer; }
+  .btn-dl-selected { background:var(--accent); color:#fff; border:none; border-radius:10px; padding:10px 22px; font-family:'Syne',sans-serif; font-weight:700; font-size:.88rem; cursor:pointer; transition:opacity .2s; display:flex; align-items:center; gap:8px; }
+  .btn-dl-selected:disabled { opacity:.4; cursor:not-allowed; }
+  .btn-dl-selected:hover:not(:disabled) { opacity:.85; }
 
   /* bulk progress */
-  .bulk-progress { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; margin-bottom: 20px; display: none; }
-  .bulk-progress.show { display: block; }
-  .bulk-title { font-family: 'Syne', sans-serif; font-weight: 700; margin-bottom: 12px; font-size: .95rem; }
-  .bulk-bar-track { height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; margin-bottom: 8px; }
-  .bulk-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg,var(--accent),var(--accent2)); width: 0%; transition: width .4s; }
-  .bulk-label { font-size: .82rem; color: var(--muted); }
+  .bulk-progress { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px 24px; margin-bottom:20px; display:none; }
+  .bulk-progress.show { display:block; }
+  .bulk-title { font-family:'Syne',sans-serif; font-weight:700; margin-bottom:10px; font-size:.95rem; }
+  .bulk-bar-track { height:6px; background:var(--border); border-radius:100px; overflow:hidden; margin-bottom:8px; }
+  .bulk-bar-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width .4s; }
+  .bulk-label { font-size:.82rem; color:var(--muted); }
 
-  /* footer */
-  footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 28px 40px; text-align: center; color: var(--muted); font-size: .82rem; margin-top: 40px; }
+  /* video grid */
+  .video-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; }
 
-  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-  .hero > * { animation: fadeUp .6s ease both; }
-  .hero .badge { animation-delay: .1s; }
-  .hero h1 { animation-delay: .2s; }
-  .hero .subtitle { animation-delay: .3s; }
-  .hero .downloader { animation-delay: .4s; }
+  .video-card { background:var(--card); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; position:relative; transition:border-color .2s,transform .2s; }
+  .video-card:hover { border-color:#ffffff22; transform:translateY(-2px); }
+  .video-card.selected { border-color:var(--accent); }
+  .video-card.selected .vc-check { opacity:1; }
 
-  @media (max-width: 600px) {
-    nav { padding: 14px 18px; }
-    .hero { padding: 50px 16px 40px; }
-    .input-row, .user-input-row { flex-direction: column; }
-    .video-grid { grid-template-columns: repeat(2, 1fr); }
-    footer { padding: 24px 18px; }
+  .vc-thumb { width:100%; aspect-ratio:9/16; background:var(--surface); position:relative; overflow:hidden; cursor:pointer; }
+  .vc-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+  .vc-thumb:hover img { transform:scale(1.04); }
+  .vc-thumb .no-thumb { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:36px; }
+  .vc-duration { position:absolute; bottom:6px; right:8px; background:#000000cc; color:#fff; font-size:.72rem; padding:2px 7px; border-radius:6px; font-weight:600; pointer-events:none; }
+  .vc-check { position:absolute; top:8px; left:8px; width:24px; height:24px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:13px; opacity:0; transition:opacity .2s; box-shadow:0 2px 8px #00000060; pointer-events:none; }
+
+  .vc-info { padding:10px 11px 12px; }
+  .vc-title { font-size:.8rem; font-weight:500; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin-bottom:7px; }
+  .vc-meta { display:flex; gap:8px; font-size:.72rem; color:var(--muted); margin-bottom:9px; }
+  .vc-actions { display:flex; gap:5px; }
+  .vc-btn { flex:1; padding:7px 4px; border-radius:7px; border:none; cursor:pointer; font-size:.75rem; font-weight:600; font-family:'DM Sans',sans-serif; transition:opacity .2s; }
+  .vc-btn.mp4 { background:var(--accent); color:#fff; }
+  .vc-btn.mp3 { background:#25f4ee18; color:var(--accent2); border:1px solid #25f4ee33; }
+  .vc-btn:hover:not(:disabled) { opacity:.8; }
+  .vc-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+  .vc-overlay { position:absolute; inset:0; background:#0a0a0fdd; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; border-radius:12px; }
+  .vc-overlay .spinner { width:26px; height:26px; margin:0; border-top-color:var(--accent2); }
+  .vc-overlay span { font-size:.75rem; color:var(--muted); }
+
+  /* skeleton cards for loading */
+  .skeleton { background:var(--card); border:1.5px solid var(--border); border-radius:14px; overflow:hidden; }
+  .skel-thumb { width:100%; aspect-ratio:9/16; background:linear-gradient(90deg,var(--surface) 25%,#1c1c28 50%,var(--surface) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+  .skel-line { height:10px; border-radius:6px; margin:10px 11px 5px; background:linear-gradient(90deg,var(--surface) 25%,#1c1c28 50%,var(--surface) 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+  .skel-line.short { width:60%; height:8px; margin-top:0; }
+  @keyframes shimmer { to { background-position:-200% 0; } }
+
+  /* infinite scroll sentinel */
+  #scrollSentinel { height:1px; margin-top:20px; }
+  .load-more-status { text-align:center; padding:24px; color:var(--muted); font-size:.88rem; display:none; }
+  .load-more-status.show { display:block; }
+  .load-more-status .spinner { border-top-color:var(--accent2); width:28px; height:28px; margin:0 auto 10px; }
+
+  /* user states */
+  .user-state { display:none; }
+  .user-state.show { display:block; }
+  .user-loading { text-align:center; padding:60px 0; }
+  .user-loading .spinner { width:40px; height:40px; margin:0 auto 16px; border-top-color:var(--accent2); }
+  .user-loading p { color:var(--muted); }
+
+  footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:28px 40px; text-align:center; color:var(--muted); font-size:.82rem; margin-top:40px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .hero > * { animation:fadeUp .6s ease both; }
+  .hero .badge{animation-delay:.1s} .hero h1{animation-delay:.2s} .hero .subtitle{animation-delay:.3s} .hero .downloader{animation-delay:.4s}
+
+  @media (max-width:600px) {
+    nav{padding:14px 18px} .hero{padding:50px 16px 40px}
+    .input-row,.user-input-row{flex-direction:column}
+    .video-grid{grid-template-columns:repeat(2,1fr)}
+    footer{padding:24px 18px}
   }
 </style>
 </head>
@@ -224,34 +206,24 @@
   </div>
 </nav>
 
-<!-- TAB SWITCHER -->
 <div class="page-tabs">
-  <button class="page-tab active" onclick="switchPage('single')">🔗 Losse Video</button>
-  <button class="page-tab" onclick="switchPage('user')">👤 Gebruikersprofiel</button>
+  <button class="page-tab active" onclick="switchPage('single',this)">🔗 Losse Video</button>
+  <button class="page-tab" onclick="switchPage('user',this)">👤 Gebruikersprofiel</button>
 </div>
 
-<!-- ══════════════════════════════════════════════════════ PAGE: SINGLE VIDEO -->
+<!-- ══ PAGE: SINGLE ══ -->
 <div class="page active" id="page-single">
   <div class="hero">
     <div class="badge">🔒 Lokaal · Privé · Geen limieten</div>
     <h1>Download TikTok Video's<br><span class="grad">Jouw machine, jouw regels</span></h1>
     <p class="subtitle">Plak een TikTok URL en download direct naar je computer — MP4 of MP3.</p>
-
     <div class="downloader">
       <div class="input-row">
         <input type="text" class="url-input" id="urlInput" placeholder="https://www.tiktok.com/@user/video/...">
         <button class="btn-primary" id="fetchBtn" onclick="fetchInfo()">Video ophalen</button>
       </div>
-
-      <div class="state" id="stateLoading">
-        <div class="loading-inner">
-          <div class="spinner"></div>
-          <p id="loadingMsg">Video info ophalen…</p>
-        </div>
-      </div>
-      <div class="state" id="stateError">
-        <div class="error-box">⚠️ <span id="errorMsg">Er ging iets mis.</span></div>
-      </div>
+      <div class="state" id="stateLoading"><div class="loading-inner"><div class="spinner"></div><p>Video info ophalen…</p></div></div>
+      <div class="state" id="stateError"><div class="error-box">⚠️ <span id="errorMsg"></span></div></div>
       <div class="state" id="stateResult">
         <div class="result-card">
           <div class="thumb-wrap" id="thumbWrap">🎬</div>
@@ -274,53 +246,43 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════ PAGE: USER BROWSER -->
+<!-- ══ PAGE: USER ══ -->
 <div class="page" id="page-user">
   <div class="user-page">
     <h2>👤 Gebruikersprofiel browsen</h2>
-    <p class="sub">Voer een TikTok-gebruikersnaam in om alle video's te bekijken en te selecteren welke je wilt downloaden.</p>
+    <p class="sub">Voer een gebruikersnaam in — video's worden automatisch geladen terwijl je scrollt.</p>
 
     <div class="user-search-card">
       <div class="user-input-row">
         <span class="at-prefix">@</span>
-        <input type="text" class="user-input" id="usernameInput" placeholder="gebruikersnaam" onkeydown="if(event.key==='Enter')fetchUserVideos()">
-        <button class="btn-teal" id="fetchUserBtn" onclick="fetchUserVideos()">Profiel laden</button>
+        <input type="text" class="user-input" id="usernameInput" placeholder="gebruikersnaam" onkeydown="if(event.key==='Enter')startUserSearch()">
+        <button class="btn-teal" id="fetchUserBtn" onclick="startUserSearch()">Profiel laden</button>
       </div>
     </div>
 
-    <!-- Loading -->
     <div class="user-state" id="userStateLoading">
-      <div class="user-loading">
-        <div class="spinner"></div>
-        <p>Video's ophalen van profiel… dit kan even duren</p>
-      </div>
+      <div class="user-loading"><div class="spinner"></div><p>Eerste video's ophalen…</p></div>
     </div>
-
-    <!-- Error -->
     <div class="user-state" id="userStateError">
-      <div class="error-box">⚠️ <span id="userErrorMsg">Er ging iets mis.</span></div>
+      <div class="error-box">⚠️ <span id="userErrorMsg"></span></div>
     </div>
 
-    <!-- Results -->
     <div class="user-state" id="userStateResult">
-      <!-- Profile header -->
       <div class="profile-header" id="profileHeader">
         <div class="profile-avatar" id="profileAvatar">?</div>
         <div>
           <div class="profile-name" id="profileName">@gebruiker</div>
-          <div class="profile-count" id="profileCount">0 video's gevonden</div>
+          <div class="profile-count" id="profileCount">laden…</div>
         </div>
       </div>
 
-      <!-- Bulk progress -->
       <div class="bulk-progress" id="bulkProgress">
         <div class="bulk-title" id="bulkTitle">Downloaden…</div>
         <div class="bulk-bar-track"><div class="bulk-bar-fill" id="bulkFill"></div></div>
         <div class="bulk-label" id="bulkLabel"></div>
       </div>
 
-      <!-- Select all + download selected -->
-      <div class="select-all-row">
+      <div class="toolbar">
         <label class="checkbox-label">
           <input type="checkbox" id="selectAll" onchange="toggleSelectAll(this.checked)">
           Alles selecteren
@@ -330,8 +292,14 @@
         </button>
       </div>
 
-      <!-- Video grid -->
       <div class="video-grid" id="videoGrid"></div>
+
+      <!-- Infinite scroll sentinel -->
+      <div id="scrollSentinel"></div>
+      <div class="load-more-status" id="loadMoreStatus">
+        <div class="spinner"></div>
+        <div id="loadMoreText">Meer video's laden…</div>
+      </div>
     </div>
   </div>
 </div>
@@ -341,285 +309,313 @@
 </footer>
 
 <script>
-  // ── State ────────────────────────────────────────────────────────────────
-  let currentInfo = null;
-  let selectedFormatId = null;
-  let userVideos = [];
-  let selectedVideoIds = new Set();
-  let bulkQueue = [];
-  let bulkIndex = 0;
+// ── State ──────────────────────────────────────────────────────────────────
+let currentInfo = null, selectedFormatId = null;
+let userVideos = [];
+let selectedVideoIds = new Set();
+let currentUsername = '';
+let currentPage = 0;
+let isLoadingMore = false;
+let hasMoreVideos = true;
+let totalLoaded = 0;
+const PAGE_SIZE = 24;
 
-  // ── Page tabs ────────────────────────────────────────────────────────────
-  function switchPage(page) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('page-' + page).classList.add('active');
-    event.target.classList.add('active');
+// ── Page tabs ──────────────────────────────────────────────────────────────
+function switchPage(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Server health ──────────────────────────────────────────────────────────
+async function checkServer() {
+  try {
+    const r = await fetch('/api/health');
+    const d = await r.json();
+    document.getElementById('statusDot').className = 'status-dot online';
+    document.getElementById('statusText').textContent = `yt-dlp ${d.ytdlp}`;
+  } catch {
+    document.getElementById('statusDot').className = 'status-dot offline';
+    document.getElementById('statusText').textContent = 'Server offline — run: node server.js';
   }
+}
+checkServer();
 
-  // ── Server health ────────────────────────────────────────────────────────
-  async function checkServer() {
-    try {
-      const r = await fetch('/api/health');
-      const d = await r.json();
-      document.getElementById('statusDot').className = 'status-dot online';
-      document.getElementById('statusText').textContent = `yt-dlp ${d.ytdlp}`;
-    } catch {
-      document.getElementById('statusDot').className = 'status-dot offline';
-      document.getElementById('statusText').textContent = 'Server offline — run: node server.js';
+// ── Helpers ────────────────────────────────────────────────────────────────
+function fmtDuration(s) { if(!s)return''; const m=Math.floor(s/60),sec=s%60; return `${m}:${String(sec).padStart(2,'0')}`; }
+function fmtNum(n) { if(!n)return'0'; if(n>=1e6)return(n/1e6).toFixed(1)+'M'; if(n>=1e3)return(n/1e3).toFixed(1)+'K'; return String(n); }
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function showState(id) {
+  ['stateLoading','stateError','stateResult'].forEach(s =>
+    document.getElementById(s).classList.toggle('show', s===id));
+}
+function showUserState(id) {
+  ['userStateLoading','userStateError','userStateResult'].forEach(s =>
+    document.getElementById(s).classList.toggle('show', s===id));
+}
+
+// ── Single video ───────────────────────────────────────────────────────────
+async function fetchInfo() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) { const inp=document.getElementById('urlInput'); inp.classList.add('shake'); setTimeout(()=>inp.classList.remove('shake'),500); return; }
+  document.getElementById('fetchBtn').disabled = true;
+  showState('stateLoading'); currentInfo = null;
+  try {
+    const res = await fetch('/api/info', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
+    const data = await res.json();
+    if (!res.ok||data.error) { showState('stateError'); document.getElementById('errorMsg').textContent=data.error; return; }
+    currentInfo = {...data, url};
+    renderResult(data); showState('stateResult');
+  } catch { showState('stateError'); document.getElementById('errorMsg').textContent='Server niet bereikbaar. Draait node server.js?'; }
+  finally { document.getElementById('fetchBtn').disabled=false; }
+}
+function renderResult(data) {
+  document.getElementById('resultTitle').textContent = data.title||'TikTok Video';
+  document.getElementById('resultSub').textContent = `@${data.uploader}${data.duration?' · '+fmtDuration(data.duration):''}`;
+  const tw=document.getElementById('thumbWrap');
+  tw.innerHTML = data.thumbnail?`<img src="${data.thumbnail}" alt="" onerror="this.parentElement.textContent='🎬'">`:'🎬';
+  const qRow=document.getElementById('qualityRow'); qRow.innerHTML=''; selectedFormatId=null;
+  if (data.formats?.length) {
+    data.formats.forEach((f,i)=>{
+      const btn=document.createElement('button'); btn.className='quality-btn'+(i===0?' selected':'');
+      btn.textContent=f.quality; btn.dataset.fmtId=f.format_id;
+      if(i===0) selectedFormatId=f.format_id;
+      btn.onclick=()=>{ document.querySelectorAll('.quality-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); selectedFormatId=f.format_id; };
+      qRow.appendChild(btn);
+    });
+  }
+  document.getElementById('progressWrap').classList.remove('show');
+}
+async function startDownload(type) {
+  if (!currentInfo) return;
+  const b4=document.getElementById('btnMp4'),b3=document.getElementById('btnMp3');
+  b4.disabled=true; b3.disabled=true;
+  const pw=document.getElementById('progressWrap'),fill=document.getElementById('progressFill'),label=document.getElementById('progressLabel');
+  pw.classList.add('show'); fill.style.width='15%'; label.textContent=`${type.toUpperCase()} download starten…`;
+  let prog=15;
+  const ticker=setInterval(()=>{ prog=Math.min(prog+Math.random()*7,88); fill.style.width=prog+'%'; },900);
+  const params=new URLSearchParams({url:currentInfo.url,type,...(type==='mp4'&&selectedFormatId?{format:selectedFormatId}:{})});
+  const a=document.createElement('a'); a.href=`/api/download?${params}`; a.download=type==='mp3'?'plskeep_audio.mp3':'plskeep_video.mp4';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>{ clearInterval(ticker); fill.style.width='100%'; label.textContent='✅ Download gestart — check je Downloads map!'; b4.disabled=false; b3.disabled=false; },3500);
+}
+document.getElementById('urlInput').addEventListener('keydown',e=>{ if(e.key==='Enter')fetchInfo(); });
+document.getElementById('urlInput').addEventListener('focus',async()=>{
+  if(document.getElementById('urlInput').value)return;
+  try{ const t=await navigator.clipboard.readText(); if(t.includes('tiktok.com'))document.getElementById('urlInput').value=t; }catch{}
+});
+
+// ── User profile + infinite scroll ────────────────────────────────────────
+async function startUserSearch() {
+  const raw = document.getElementById('usernameInput').value.trim();
+  if (!raw) return;
+
+  // Reset state
+  currentUsername = raw.replace(/^@/,'');
+  currentPage = 0;
+  hasMoreVideos = true;
+  isLoadingMore = false;
+  totalLoaded = 0;
+  userVideos = [];
+  selectedVideoIds.clear();
+  updateSelectedUI();
+
+  document.getElementById('videoGrid').innerHTML = '';
+  document.getElementById('bulkProgress').classList.remove('show');
+  document.getElementById('selectAll').checked = false;
+  document.getElementById('fetchUserBtn').disabled = true;
+
+  showUserState('userStateLoading');
+
+  // Load first page
+  const ok = await loadNextPage(true);
+  if (ok) {
+    document.getElementById('profileAvatar').textContent = currentUsername.charAt(0).toUpperCase();
+    document.getElementById('profileName').textContent = '@' + currentUsername;
+    showUserState('userStateResult');
+  }
+  document.getElementById('fetchUserBtn').disabled = false;
+}
+
+async function loadNextPage(isFirst = false) {
+  if (isLoadingMore || !hasMoreVideos) return false;
+  isLoadingMore = true;
+
+  const status = document.getElementById('loadMoreStatus');
+  const statusText = document.getElementById('loadMoreText');
+  if (!isFirst) { status.classList.add('show'); statusText.textContent = 'Meer video\'s laden…'; }
+
+  // Show skeleton cards on first load
+  if (isFirst) showSkeletons(12);
+
+  currentPage++;
+
+  try {
+    const res = await fetch('/api/user/videos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: currentUsername, page: currentPage, pageSize: PAGE_SIZE })
+    });
+    const data = await res.json();
+
+    if (!res.ok || data.error) {
+      if (isFirst) {
+        showUserState('userStateError');
+        document.getElementById('userErrorMsg').textContent = data.error || 'Fout bij ophalen.';
+      } else {
+        statusText.textContent = '⚠️ Fout bij laden van meer video\'s.';
+        setTimeout(() => status.classList.remove('show'), 3000);
+      }
+      return false;
     }
-  }
-  checkServer();
 
-  // ── Helpers ──────────────────────────────────────────────────────────────
-  function fmtDuration(s) {
-    if (!s) return '';
-    const m = Math.floor(s / 60), sec = s % 60;
-    return `${m}:${String(sec).padStart(2,'0')}`;
-  }
-  function fmtNum(n) {
-    if (!n) return '0';
-    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-    if (n >= 1e3) return (n/1e3).toFixed(1) + 'K';
-    return String(n);
-  }
-  function showState(id) {
-    ['stateLoading','stateError','stateResult'].forEach(s =>
-      document.getElementById(s).classList.toggle('show', s === id));
-  }
-  function showUserState(id) {
-    ['userStateLoading','userStateError','userStateResult'].forEach(s =>
-      document.getElementById(s).classList.toggle('show', s === id));
-  }
-
-  // ── Single video ─────────────────────────────────────────────────────────
-  async function fetchInfo() {
-    const url = document.getElementById('urlInput').value.trim();
-    if (!url) {
-      const inp = document.getElementById('urlInput');
-      inp.classList.add('shake');
-      setTimeout(() => inp.classList.remove('shake'), 500);
-      return;
+    // Remove skeletons on first page
+    if (isFirst) {
+      document.getElementById('videoGrid').innerHTML = '';
     }
-    document.getElementById('fetchBtn').disabled = true;
-    showState('stateLoading');
-    currentInfo = null;
-    try {
-      const res = await fetch('/api/info', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({url}) });
-      const data = await res.json();
-      if (!res.ok || data.error) { showState('stateError'); document.getElementById('errorMsg').textContent = data.error; return; }
-      currentInfo = {...data, url};
-      renderResult(data);
-      showState('stateResult');
-    } catch {
-      showState('stateError');
-      document.getElementById('errorMsg').textContent = 'Server niet bereikbaar. Draait node server.js?';
-    } finally {
-      document.getElementById('fetchBtn').disabled = false;
+
+    appendVideos(data.videos);
+    userVideos.push(...data.videos);
+    totalLoaded += data.videos.length;
+    hasMoreVideos = data.hasMore;
+
+    document.getElementById('profileCount').textContent =
+      `${totalLoaded} video's geladen${hasMoreVideos ? ' (scroll voor meer)' : ' (alles geladen)'}`;
+
+    status.classList.remove('show');
+    if (!hasMoreVideos) {
+      statusText.textContent = '✅ Alle video\'s geladen';
+      status.classList.add('show');
+      setTimeout(() => status.classList.remove('show'), 2500);
     }
-  }
 
-  function renderResult(data) {
-    document.getElementById('resultTitle').textContent = data.title || 'TikTok Video';
-    document.getElementById('resultSub').textContent = `@${data.uploader}${data.duration ? ' · ' + fmtDuration(data.duration) : ''}`;
-    const tw = document.getElementById('thumbWrap');
-    tw.innerHTML = data.thumbnail ? `<img src="${data.thumbnail}" alt="" onerror="this.parentElement.textContent='🎬'">` : '🎬';
-    const qRow = document.getElementById('qualityRow');
-    qRow.innerHTML = '';
-    selectedFormatId = null;
-    if (data.formats?.length) {
-      data.formats.forEach((f,i) => {
-        const btn = document.createElement('button');
-        btn.className = 'quality-btn' + (i===0?' selected':'');
-        btn.textContent = f.quality;
-        btn.dataset.fmtId = f.format_id;
-        if (i===0) selectedFormatId = f.format_id;
-        btn.onclick = () => { document.querySelectorAll('.quality-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); selectedFormatId = f.format_id; };
-        qRow.appendChild(btn);
-      });
-    }
-    document.getElementById('progressWrap').classList.remove('show');
-  }
-
-  async function startDownload(type) {
-    if (!currentInfo) return;
-    const b4 = document.getElementById('btnMp4'), b3 = document.getElementById('btnMp3');
-    b4.disabled = true; b3.disabled = true;
-    const pw = document.getElementById('progressWrap');
-    const fill = document.getElementById('progressFill');
-    const label = document.getElementById('progressLabel');
-    pw.classList.add('show');
-    fill.style.width = '15%';
-    label.textContent = `${type.toUpperCase()} download starten…`;
-    let prog = 15;
-    const ticker = setInterval(() => { prog = Math.min(prog + Math.random()*7, 88); fill.style.width = prog+'%'; }, 900);
-    const params = new URLSearchParams({url: currentInfo.url, type, ...(type==='mp4'&&selectedFormatId?{format:selectedFormatId}:{})});
-    const a = document.createElement('a');
-    a.href = `/api/download?${params}`;
-    a.download = type==='mp3'?'plskeep_audio.mp3':'plskeep_video.mp4';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(() => { clearInterval(ticker); fill.style.width='100%'; label.textContent='✅ Download gestart — check je Downloads map!'; b4.disabled=false; b3.disabled=false; }, 3500);
-  }
-
-  document.getElementById('urlInput').addEventListener('keydown', e => { if(e.key==='Enter') fetchInfo(); });
-  document.getElementById('urlInput').addEventListener('focus', async () => {
-    if (document.getElementById('urlInput').value) return;
-    try { const t = await navigator.clipboard.readText(); if(t.includes('tiktok.com')) document.getElementById('urlInput').value = t; } catch {}
-  });
-
-  // ── User profile browser ─────────────────────────────────────────────────
-  async function fetchUserVideos() {
-    const raw = document.getElementById('usernameInput').value.trim();
-    if (!raw) return;
-    document.getElementById('fetchUserBtn').disabled = true;
-    showUserState('userStateLoading');
-    selectedVideoIds.clear();
-    updateSelectedUI();
-
-    try {
-      const res = await fetch('/api/user/videos', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({username: raw}) });
-      const data = await res.json();
-      if (!res.ok || data.error) { showUserState('userStateError'); document.getElementById('userErrorMsg').textContent = data.error; return; }
-      userVideos = data.videos;
-      renderUserProfile(data.username, data.videos);
-      showUserState('userStateResult');
-    } catch {
+    return true;
+  } catch {
+    if (isFirst) {
       showUserState('userStateError');
-      document.getElementById('userErrorMsg').textContent = 'Server niet bereikbaar. Draait node server.js?';
-    } finally {
-      document.getElementById('fetchUserBtn').disabled = false;
+      document.getElementById('userErrorMsg').textContent = 'Server niet bereikbaar.';
     }
+    return false;
+  } finally {
+    isLoadingMore = false;
   }
+}
 
-  function renderUserProfile(username, videos) {
-    document.getElementById('profileName').textContent = '@' + username;
-    document.getElementById('profileCount').textContent = `${videos.length} video's gevonden (max 30)`;
-    document.getElementById('profileAvatar').textContent = username.charAt(0).toUpperCase();
-    document.getElementById('bulkProgress').classList.remove('show');
-    document.getElementById('selectAll').checked = false;
+function showSkeletons(n) {
+  const grid = document.getElementById('videoGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < n; i++) {
+    const sk = document.createElement('div');
+    sk.className = 'skeleton';
+    sk.innerHTML = `<div class="skel-thumb"></div><div class="skel-line"></div><div class="skel-line short"></div>`;
+    grid.appendChild(sk);
+  }
+}
 
-    const grid = document.getElementById('videoGrid');
-    grid.innerHTML = '';
-
-    videos.forEach(v => {
-      const card = document.createElement('div');
-      card.className = 'video-card';
-      card.id = 'vc-' + v.id;
-      card.innerHTML = `
-        <div class="vc-thumb">
-          ${v.thumbnail
-            ? `<img src="${v.thumbnail}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=no-thumb>🎬</div>'">`
-            : '<div class="no-thumb">🎬</div>'}
-          ${v.duration ? `<div class="vc-duration">${fmtDuration(v.duration)}</div>` : ''}
-          <div class="vc-check">✓</div>
+function appendVideos(videos) {
+  const grid = document.getElementById('videoGrid');
+  videos.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.id = 'vc-' + v.id;
+    card.innerHTML = `
+      <div class="vc-thumb">
+        ${v.thumbnail
+          ? `<img src="${v.thumbnail}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=no-thumb>🎬</div>'">`
+          : '<div class="no-thumb">🎬</div>'}
+        ${v.duration ? `<div class="vc-duration">${fmtDuration(v.duration)}</div>` : ''}
+        <div class="vc-check">✓</div>
+      </div>
+      <div class="vc-info">
+        <div class="vc-title">${escHtml(v.title)}</div>
+        <div class="vc-meta">
+          <span>👁 ${fmtNum(v.view_count)}</span>
+          ${v.like_count?`<span>❤️ ${fmtNum(v.like_count)}</span>`:''}
         </div>
-        <div class="vc-info">
-          <div class="vc-title">${escHtml(v.title)}</div>
-          <div class="vc-meta">
-            <span>👁 ${fmtNum(v.view_count)}</span>
-            ${v.like_count ? `<span>❤️ ${fmtNum(v.like_count)}</span>` : ''}
-          </div>
-          <div class="vc-actions">
-            <button class="vc-btn mp4" onclick="downloadSingle(event,'${v.id}','mp4')">⬇ MP4</button>
-            <button class="vc-btn mp3" onclick="downloadSingle(event,'${v.id}','mp3')">🎵 MP3</button>
-          </div>
-        </div>`;
-      card.querySelector('.vc-thumb').addEventListener('click', () => toggleVideoSelect(v.id));
-      grid.appendChild(card);
-    });
+        <div class="vc-actions">
+          <button class="vc-btn mp4" data-id="${v.id}" data-type="mp4" onclick="downloadSingle(event,'${v.id}','mp4')">⬇ MP4</button>
+          <button class="vc-btn mp3" data-id="${v.id}" data-type="mp3" onclick="downloadSingle(event,'${v.id}','mp3')">🎵 MP3</button>
+        </div>
+      </div>`;
+    card.querySelector('.vc-thumb').addEventListener('click', () => toggleVideoSelect(v.id));
+    grid.appendChild(card);
+  });
+}
+
+// ── Infinite scroll via IntersectionObserver ───────────────────────────────
+const sentinel = document.getElementById('scrollSentinel');
+const observer = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && hasMoreVideos && !isLoadingMore && currentUsername) {
+    loadNextPage();
   }
+}, { rootMargin: '300px' }); // start loading 300px before hitting the bottom
+observer.observe(sentinel);
 
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+// ── Selection ──────────────────────────────────────────────────────────────
+function toggleVideoSelect(id) {
+  if (selectedVideoIds.has(id)) selectedVideoIds.delete(id);
+  else selectedVideoIds.add(id);
+  const card = document.getElementById('vc-' + id);
+  if (card) card.classList.toggle('selected', selectedVideoIds.has(id));
+  updateSelectedUI();
+}
+function toggleSelectAll(checked) {
+  selectedVideoIds.clear();
+  if (checked) userVideos.forEach(v => selectedVideoIds.add(v.id));
+  document.querySelectorAll('.video-card').forEach(c => {
+    c.classList.toggle('selected', selectedVideoIds.has(c.id.replace('vc-','')));
+  });
+  updateSelectedUI();
+}
+function updateSelectedUI() {
+  const n = selectedVideoIds.size;
+  document.getElementById('selectedCount').textContent = n;
+  document.getElementById('btnDlSelected').disabled = n === 0;
+}
 
-  function toggleVideoSelect(id) {
-    if (selectedVideoIds.has(id)) selectedVideoIds.delete(id);
-    else selectedVideoIds.add(id);
-    const card = document.getElementById('vc-' + id);
-    if (card) card.classList.toggle('selected', selectedVideoIds.has(id));
-    updateSelectedUI();
-  }
+// ── Individual download ────────────────────────────────────────────────────
+async function downloadSingle(e, id, type) {
+  e.stopPropagation();
+  const video = userVideos.find(v => v.id === id);
+  if (!video) return;
+  const card = document.getElementById('vc-' + id);
+  const btns = card.querySelectorAll('.vc-btn');
+  btns.forEach(b => b.disabled = true);
+  const overlay = document.createElement('div');
+  overlay.className = 'vc-overlay';
+  overlay.innerHTML = `<div class="spinner"></div><span>${type.toUpperCase()} downloaden…</span>`;
+  card.appendChild(overlay);
+  const params = new URLSearchParams({url: video.url, type});
+  const a = document.createElement('a');
+  a.href = `/api/download?${params}`;
+  a.download = type==='mp3'?`plskeep_${id}.mp3`:`plskeep_${id}.mp4`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => { overlay.remove(); btns.forEach(b => b.disabled=false); }, 4000);
+}
 
-  function toggleSelectAll(checked) {
-    selectedVideoIds.clear();
-    if (checked) userVideos.forEach(v => selectedVideoIds.add(v.id));
-    document.querySelectorAll('.video-card').forEach(c => {
-      const id = c.id.replace('vc-','');
-      c.classList.toggle('selected', selectedVideoIds.has(id));
-    });
-    updateSelectedUI();
-  }
-
-  function updateSelectedUI() {
-    const count = selectedVideoIds.size;
-    document.getElementById('selectedCount').textContent = count;
-    document.getElementById('btnDlSelected').disabled = count === 0;
-  }
-
-  // Download a single video from the grid
-  async function downloadSingle(e, id, type) {
-    e.stopPropagation();
-    const video = userVideos.find(v => v.id === id);
-    if (!video) return;
-    const card = document.getElementById('vc-' + id);
-    const btns = card.querySelectorAll('.vc-btn');
-    btns.forEach(b => b.disabled = true);
-
-    // Show overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'vc-downloading';
-    overlay.innerHTML = `<div class="spinner"></div><span>${type.toUpperCase()} downloaden…</span>`;
-    card.appendChild(overlay);
-
-    const params = new URLSearchParams({url: video.url, type});
-    const a = document.createElement('a');
-    a.href = `/api/download?${params}`;
-    a.download = type === 'mp3' ? `plskeep_${id}.mp3` : `plskeep_${id}.mp4`;
+// ── Bulk download selected ─────────────────────────────────────────────────
+async function downloadSelected() {
+  const ids = [...selectedVideoIds];
+  if (!ids.length) return;
+  const bp=document.getElementById('bulkProgress'),fill=document.getElementById('bulkFill'),label=document.getElementById('bulkLabel'),title=document.getElementById('bulkTitle');
+  bp.classList.add('show');
+  document.getElementById('btnDlSelected').disabled = true;
+  for (let i=0; i<ids.length; i++) {
+    const video = userVideos.find(v=>v.id===ids[i]);
+    if (!video) continue;
+    fill.style.width = Math.round((i/ids.length)*100)+'%';
+    title.textContent = `Downloading ${i+1} / ${ids.length}`;
+    label.textContent = video.title.slice(0,60)+(video.title.length>60?'…':'');
+    const params = new URLSearchParams({url:video.url,type:'mp4'});
+    const a=document.createElement('a'); a.href=`/api/download?${params}`; a.download=`plskeep_${ids[i]}.mp4`;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
-
-    setTimeout(() => {
-      overlay.remove();
-      btns.forEach(b => b.disabled = false);
-    }, 4000);
+    await new Promise(r=>setTimeout(r,3500));
   }
-
-  // Download all selected videos one by one
-  async function downloadSelected() {
-    const ids = [...selectedVideoIds];
-    if (!ids.length) return;
-
-    const bp = document.getElementById('bulkProgress');
-    const fill = document.getElementById('bulkFill');
-    const label = document.getElementById('bulkLabel');
-    const title = document.getElementById('bulkTitle');
-    bp.classList.add('show');
-    document.getElementById('btnDlSelected').disabled = true;
-
-    for (let i = 0; i < ids.length; i++) {
-      const video = userVideos.find(v => v.id === ids[i]);
-      if (!video) continue;
-
-      const pct = Math.round(((i) / ids.length) * 100);
-      fill.style.width = pct + '%';
-      title.textContent = `Downloading ${i+1} / ${ids.length}`;
-      label.textContent = video.title.slice(0, 60) + (video.title.length > 60 ? '…' : '');
-
-      const params = new URLSearchParams({url: video.url, type: 'mp4'});
-      const a = document.createElement('a');
-      a.href = `/api/download?${params}`;
-      a.download = `plskeep_${ids[i]}.mp4`;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-
-      // Wait between downloads to avoid hammering
-      await new Promise(r => setTimeout(r, 3500));
-    }
-
-    fill.style.width = '100%';
-    title.textContent = '✅ Alle downloads gestart!';
-    label.textContent = 'Check je Downloads map.';
-    document.getElementById('btnDlSelected').disabled = false;
-  }
+  fill.style.width='100%'; title.textContent='✅ Alle downloads gestart!'; label.textContent='Check je Downloads map.';
+  document.getElementById('btnDlSelected').disabled=false;
+}
 </script>
 </body>
 </html>
