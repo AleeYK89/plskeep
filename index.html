@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TikSave – Lokale TikTok Downloader</title>
+<title>plskeep – Lokale TikTok Downloader</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -337,7 +337,7 @@
 </div>
 
 <footer>
-  TikSave draait lokaal op jouw machine · Alleen voor persoonlijk gebruik · Niet gelieerd aan TikTok / ByteDance
+  plskeep draait lokaal op jouw machine · Alleen voor persoonlijk gebruik · Niet gelieerd aan TikTok / ByteDance
 </footer>
 
 <script>
@@ -456,7 +456,7 @@
     const params = new URLSearchParams({url: currentInfo.url, type, ...(type==='mp4'&&selectedFormatId?{format:selectedFormatId}:{})});
     const a = document.createElement('a');
     a.href = `/api/download?${params}`;
-    a.download = type==='mp3'?'tiksave_audio.mp3':'tiksave_video.mp4';
+    a.download = type==='mp3'?'plskeep_audio.mp3':'plskeep_video.mp4';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => { clearInterval(ticker); fill.style.width='100%'; label.textContent='✅ Download gestart — check je Downloads map!'; b4.disabled=false; b3.disabled=false; }, 3500);
   }
@@ -575,7 +575,7 @@
     const params = new URLSearchParams({url: video.url, type});
     const a = document.createElement('a');
     a.href = `/api/download?${params}`;
-    a.download = type === 'mp3' ? `tiksave_${id}.mp3` : `tiksave_${id}.mp4`;
+    a.download = type === 'mp3' ? `plskeep_${id}.mp3` : `plskeep_${id}.mp4`;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
 
     setTimeout(() => {
@@ -608,7 +608,7 @@
       const params = new URLSearchParams({url: video.url, type: 'mp4'});
       const a = document.createElement('a');
       a.href = `/api/download?${params}`;
-      a.download = `tiksave_${ids[i]}.mp4`;
+      a.download = `plskeep_${ids[i]}.mp4`;
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
 
       // Wait between downloads to avoid hammering
